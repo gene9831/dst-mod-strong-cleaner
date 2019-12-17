@@ -12,7 +12,7 @@ Things that are in the players' inventory and containers or not include in the w
 BTW, server reboot will remove all tags.
 ]]
 author = "辣椒小皇纸"
-version = "1.0.1"
+version = "1.1.0"
 
 forumthread = ""
 

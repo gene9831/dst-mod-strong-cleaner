@@ -1,3 +1,8 @@
+local TheNet = GLOBAL.TheNet
+local lang = TheNet:GetDefaultServerLanguage()
+
+local lightbulb = "󰀏"
+
 local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
@@ -42,7 +47,6 @@ local function DoRemove()
                 and v.prefab ~= "hivehat"                   --蜂王帽
             then
                 if v:HasTag("RemoveCountOne") then
-                    print("111")
                     v:Remove()
                     local numm = list[v.name.."  "..v.prefab]
                     if numm == nil then
@@ -52,7 +56,6 @@ local function DoRemove()
                         list[v.name.."  "..v.prefab] = numm
                     end
                 else
-                    print("222")
                     v:AddTag("RemoveCountOne")
                 end
             end
@@ -60,6 +63,14 @@ local function DoRemove()
     end
     for k,v in pairs(list) do
         print("wiped", v, k)
+    end
+    print("Wiping Done!")
+    if not GLOBAL.TheShard:IsSlave() then
+        if lang == "zh" then
+            TheNet:Announce(lightbulb.."服务器清理完毕"..lightbulb)
+        else
+            TheNet:Announce(lightbulb.."Server Cleaning Done"..lightbulb)
+        end
     end
 end
 
