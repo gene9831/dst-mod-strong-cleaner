@@ -8,7 +8,7 @@ A cleaning mod for your server.
 
 **Cleaning Mechanism:**
 
-It will check the things on the ground every 20 days. Things that are check the first time will be added tags. Things with tags that are previously added will be remove during the second round of checking. That means if something will go through at least 20 days before removed.
+It will check the things on the ground every 20 days(by default, configurable). Things that are check the first time will be added tags. Things with tags that are previously added will be remove during the second round of checking. That means if something will go through at least 20 days before removed.
 
 The checking date is at the end of the day of 20,40,60,80,100,etc.
 
