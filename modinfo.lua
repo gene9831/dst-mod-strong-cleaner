@@ -26,3 +26,24 @@ icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 
 server_filter_tags = {"Strong Cleaner"}
+
+----------------------
+-- General settings --
+----------------------
+
+configuration_options =
+{
+	{
+		name = "checking_days",
+		label = "Checking Days",
+		hover = "Checking Period清理间隔",
+		options =	{
+						{description = "10", data = 10, hover = ""},
+						{description = "20", data = 20, hover = ""},
+						{description = "30", data = 30, hover = ""},
+						{description = "40", data = 40, hover = ""},
+						{description = "50", data = 50, hover = ""},
+					},
+		default = 20,
+	},
+}

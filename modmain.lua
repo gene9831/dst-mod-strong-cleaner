@@ -1,5 +1,6 @@
 local TheNet = GLOBAL.TheNet
 local lang = TheNet:GetDefaultServerLanguage()
+local checkingdays = GetModConfigData("checking_days")
 
 local lightbulb = "󰀏"
 
@@ -69,7 +70,7 @@ local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
         if v.components.inventoryitem and v.components.inventoryitem.owner == nil then
-            if not isWhiteTag(v) and not isWhitelist(v.prefab) then
+            if not isWhitelist(v.prefab) and not isWhiteTag(v) then
                 if v:HasTag("RemoveCountOne") then
                     v:Remove()
                     local numm = list[v.name.."  "..v.prefab]
@@ -106,8 +107,8 @@ local function WorldPeriodicRemove(inst)
 	if not GLOBAL.TheWorld:HasTag("cave") then
         inst:DoTaskInTime(.5, function(inst)
     	    inst:ListenForEvent("cycleschanged", function()
-    	        local count_20days = GLOBAL.TheWorld.state.cycles / 20
-    	        if math.floor(count_20days) == count_20days then --每20天检查一次
+    	        local count_days = GLOBAL.TheWorld.state.cycles / checkingdays
+    	        if math.floor(count_days) == count_days then --默认每20天检查一次
     	            DoRemove()
     	        end
     	    end)
@@ -119,8 +120,8 @@ local function CavePeriodicRemove(inst)
 	if GLOBAL.TheWorld:HasTag("cave") then
         inst:DoTaskInTime(.5, function(inst)
     	    inst:ListenForEvent("cycleschanged", function()
-    	        local count_20days = GLOBAL.TheWorld.state.cycles / 20
-    	        if math.floor(count_20days) == count_20days then --每20天检查一次
+    	        local count_days = GLOBAL.TheWorld.state.cycles / checkingdays
+    	        if math.floor(count_days) == count_days then --默认每20天检查一次
     	            DoRemove()
     	        end
     	    end)
