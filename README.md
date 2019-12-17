@@ -53,6 +53,10 @@ BTW, server reboot will remove all tags.
 
 ## Changelog
 
+**List of tweaks I made for version 1.2.1**
+
+- Add Configuration for cleaning checking period.
+
 ## License
 
 Released under the [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html)
