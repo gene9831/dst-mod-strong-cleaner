@@ -9,9 +9,10 @@ That means if something will go through at least 20 days before removed.
 The checking date is at the end of the day of 20,40,60,80,100,etc.
 The mod will only remove things that are on the ground and not include in the whitelist.
 Things that are in the players' inventory and containers or not include in the whitelist are secure.
+BTW, server reboot will remove all tags.
 ]]
 author = "辣椒小皇纸"
-version = "1.0.0"
+version = "1.0.1"
 
 forumthread = ""
 

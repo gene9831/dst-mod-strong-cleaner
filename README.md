@@ -16,6 +16,8 @@ The mod will only remove things that are on the ground and not include in the `w
 
 Things that are in the players' inventory and containers or not include in the `whitelist` are secure.
 
+BTW, server reboot will remove all tags.
+
 **Whitelist:**
 
 - small creature such as Rabbit, Mole, Fireflies, and the like
