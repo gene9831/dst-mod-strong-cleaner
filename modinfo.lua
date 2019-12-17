@@ -2,7 +2,7 @@ name = "Strong Cleaner"
 description = [[
 A cleaning mod for your server.
 Cleaning Mechanism:
-It will check the things on the ground every 20 days.
+It will check the things on the ground every 20 days(by default, configurable).
 Things that are check the first time will be added tags.
 Things with tags that are previously added will be remove during the second round of checking.
 That means if something will go through at least 20 days before removed.
@@ -12,7 +12,7 @@ Things that are in the players' inventory and containers or not include in the w
 BTW, server reboot will remove all tags.
 ]]
 author = "辣椒小皇纸"
-version = "1.2.0"
+version = "1.2.1"
 
 forumthread = ""
 
