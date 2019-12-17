@@ -61,10 +61,13 @@ local function DoRemove()
             end
         end
     end
+    
     for k,v in pairs(list) do
         print("wiped", v, k)
     end
-    print("Wiping Done!")
+    if list ~= nil then
+    	print("Wiping Done!")
+    end
     if not GLOBAL.TheShard:IsSlave() then
         if lang == "zh" then
             TheNet:Announce(lightbulb.."服务器清理完毕"..lightbulb)
