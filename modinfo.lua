@@ -12,7 +12,7 @@ Things that are in the players' inventory and containers or not include in the w
 BTW, server reboot will remove all tags.
 ]]
 author = "辣椒小皇纸"
-version = "1.2.1"
+version = "1.3.0"
 
 forumthread = ""
 
@@ -46,4 +46,14 @@ configuration_options =
 					},
 		default = 20,
 	},
+    {
+        name = "white_area",
+        label = "White Area",
+        hover = "Things near the tables will not be removed茶几附近的物品不清理",
+        options =   {
+                        {description = "Yes", data = true, hover = ""},
+                        {description = "No", data = false, hover = ""},
+                    },
+        default = true,
+    },
 }

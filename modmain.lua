@@ -1,6 +1,9 @@
 local TheNet = GLOBAL.TheNet
 local lang = TheNet:GetDefaultServerLanguage()
+local Vector3 = GLOBAL.Vector3
+
 local checkingdays = GetModConfigData("checking_days")
+local white_area = GetModConfigData("white_area")
 
 local lightbulb = "󰀏"
 
@@ -66,22 +69,39 @@ local function isWhiteTag(prefab)
     return false
 end
 
+local function WhiteArea(inst)
+    if white_area then
+        local pos = Vector3(inst.Transform:GetWorldPosition())
+        entity_list = TheSim:FindEntities(pos.x, pos.y, pos.z, 4)
+        for i, entity in pairs(entity_list) do
+            if entity.prefab == "endtable" then
+                return false
+            end
+        end
+        return true
+    else
+        return true
+    end
+end
+
 local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
         if v.components.inventoryitem and v.components.inventoryitem.owner == nil then
             if not isWhitelist(v.prefab) and not isWhiteTag(v) then
-                if v:HasTag("RemoveCountOne") then
-                    v:Remove()
-                    local numm = list[v.name.."  "..v.prefab]
-                    if numm == nil then
-                        list[v.name.."  "..v.prefab] = 1
+                if WhiteArea(v) then
+                    if v:HasTag("RemoveCountOne") then
+                        v:Remove()
+                        local numm = list[v.name.."  "..v.prefab]
+                        if numm == nil then
+                            list[v.name.."  "..v.prefab] = 1
+                        else
+                            numm = numm + 1
+                            list[v.name.."  "..v.prefab] = numm
+                        end
                     else
-                        numm = numm + 1
-                        list[v.name.."  "..v.prefab] = numm
+                        v:AddTag("RemoveCountOne")
                     end
-                else
-                    v:AddTag("RemoveCountOne")
                 end
             end
         end
