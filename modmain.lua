@@ -19,9 +19,6 @@ local whitelist = {
     "bullkelp_beachedroot",     --海带
     "driftwood_log",            --浮木桩
     "panflute",                 --排箫
-    "tentaclespike",            --狼牙棒
-    "nightsword",               --影刀
-    "armor_sanity",             --影甲
     "skeletonhat",              --骨盔
     "armorskeleton",            --骨甲
     "thurible",                 --香炉
@@ -51,22 +48,40 @@ local whitetag = {
     "trap",                    --陷阱、狗牙陷阱、海星
 }
 
-local function isWhitelist(prefab)
+local halfwhitelist = {
+    "tentaclespike",            --狼牙棒
+    "nightsword",               --影刀
+    "armor_sanity",             --影甲
+}
+
+local function isWhitelist(name)
     for k,v in pairs(whitelist) do
-        if string.find(prefab, v) then
+        if string.find(name, v) then
             return true
         end
     end
     return false
 end
 
-local function isWhiteTag(prefab)
+local function isWhiteTag(fabs)
     for k,v in pairs(whitetag) do
-        if prefab:HasTag(v) then
+        if fabs:HasTag(v) then
             return true
         end
     end
     return false
+end
+
+local function isHalfWhitelist(fabs)
+    for k,v in pairs(halfwhitelist) do
+        if string.find(fabs.prefab, v) then
+            if fabs.components.finiteuses then
+                if fabs.components.finiteuses:GetPercent() < 1 then
+                    return true
+                end
+            end
+        end
+    end
 end
 
 local function WhiteArea(inst)
@@ -88,7 +103,7 @@ local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
         if v.components.inventoryitem and v.components.inventoryitem.owner == nil then
-            if not isWhitelist(v.prefab) and not isWhiteTag(v) then
+            if not isWhitelist(v.prefab) and not isWhiteTag(v) and isHalfWhitelist(v) then
                 if WhiteArea(v) then
                     if v:HasTag("RemoveCountOne") then
                         v:Remove()
