@@ -53,11 +53,15 @@ BTW, server reboot will remove all tags.
 
 ## Changelog
 
-**List of tweaks I made for version 1.3.0**
+**Version 1.4.0**
+
+- Tentaclespike, Armor Sanity and Sword Sanity will be removed if the fitness use percent is < 100%.
+
+**Version 1.3.0**
 
 - Things near Endtables will not be removed.
 
-**List of tweaks I made for version 1.2.1**
+**Version 1.2.1**
 
 - Add Configuration for cleaning checking period.
 
