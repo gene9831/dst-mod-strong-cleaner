@@ -14,7 +14,7 @@ The checking date is at the end of the day of 20,40,60,80,100,etc.
 
 The mod will only remove things that are on the ground and not include in the `whitelist`.
 
-Things that are in the players' inventory and containers or not include in the `whitelist` are secure.
+Things that are in the players' inventory or containers, not include in the `whitelist` or near the Endtables are secure.
 
 BTW, server reboot will remove all tags.
 
@@ -52,6 +52,10 @@ BTW, server reboot will remove all tags.
 - Bee Queen Crown
 
 ## Changelog
+
+**List of tweaks I made for version 1.3.0**
+
+- Things near Endtables will not be removed.
 
 **List of tweaks I made for version 1.2.1**
 
