@@ -53,6 +53,10 @@ BTW, server reboot will remove all tags.
 
 ## Changelog
 
+**Version 1.5.0**
+
+- Items floating on the sea will be removed whether in the whitelist or not.
+
 **Version 1.4.0**
 
 - Tentaclespike, Armor Sanity and Sword Sanity will be removed if the fitness use percent is < 100%.

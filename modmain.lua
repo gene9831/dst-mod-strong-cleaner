@@ -84,6 +84,15 @@ local function isHalfWhitelist(fabs)
     end
 end
 
+local function isFloat(fabs)
+    if fabs.components.floater then
+        if fabs.components.floater:IsFloating() and fabs.prefab ~= "driftwood_log" then
+            return true
+        end
+    end
+    return false
+end
+
 local function WhiteArea(inst)
     if white_area then
         local pos = Vector3(inst.Transform:GetWorldPosition())
@@ -103,7 +112,7 @@ local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
         if v.components.inventoryitem and v.components.inventoryitem.owner == nil then
-            if not isWhitelist(v.prefab) and not isWhiteTag(v) and isHalfWhitelist(v) then
+            if (not isWhitelist(v.prefab) and not isWhiteTag(v)) or isHalfWhitelist(v) or isFloat(v) then
                 if WhiteArea(v) then
                     if v:HasTag("RemoveCountOne") then
                         v:Remove()
