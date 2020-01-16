@@ -173,5 +173,5 @@ local function CavePeriodicRemove(inst)
 	end
 end
 
-AddPrefabPostInit("world", WorldPeriodicRemove)
+AddPrefabPostInit("forest", WorldPeriodicRemove)
 AddPrefabPostInit("cave", CavePeriodicRemove)
