@@ -36,6 +36,9 @@ local whitelist = {
     "lureplantbulb",            --食人花种子
     "tentaclespots",            --触手皮
     "hivehat",                  --蜂王帽
+    "tentaclespike",            --狼牙棒
+    "nightsword",               --影刀
+    "armor_sanity",             --影甲
 }
 
 local whitetag = {
