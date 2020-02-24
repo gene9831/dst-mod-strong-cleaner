@@ -12,7 +12,7 @@ Things that are in the players' inventory and containers or not include in the w
 BTW, server reboot will remove all tags.
 ]]
 author = "辣椒小皇纸"
-version = "1.5.2"
+version = "1.6.0"
 
 forumthread = ""
 
@@ -55,5 +55,18 @@ configuration_options =
                         {description = "No", data = false, hover = ""},
                     },
         default = true,
+    },
+    {
+        name = "boat_clean",
+        label = "Boat Clean",
+        hover = "Destroy boats that were not used for a specific days.",
+        options =   {
+                        {description = "No", data = false, hover = ""},
+                        {description = "180 days in game", data = 180, hover = ""},
+                        {description = "360 days in game", data = 360, hover = ""},
+                        {description = "540 days in game", data = 540, hover = ""},
+                        {description = "720 days in game", data = 720, hover = ""},
+                    },
+        default = false,
     },
 }

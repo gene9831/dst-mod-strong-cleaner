@@ -53,6 +53,10 @@ BTW, server reboot will remove all tags.
 
 ## Changelog
 
+**Version 1.6.0**
+
+- Add automatical boats destroying when not landed for a spiecific days in game.
+
 **Version 1.5.0**
 
 - Items floating on the sea will be removed whether in the whitelist or not.
