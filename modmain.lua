@@ -181,42 +181,44 @@ AddPrefabPostInit("cave", CavePeriodicRemove)
 
 --For Boat
 
-local boat_delete_time = GetModConfigData("boat_clean") * 480
-
-local function starttimer(inst)
-    local players = inst.components.walkableplatform:GetEntitiesOnPlatform({"player"},nil)
-    if #players == 0 then
-        inst.components.timer:StartTimer("boatRemoval", boat_delete_time)
-        --print("计时器：开始")
-    end
-end
-
-local function stoptimer(inst, obj)
-    if obj and obj:HasTag("player") then
-        inst.components.timer:StopTimer("boatRemoval")
-        --print("计时器：结束")
-    end
-end
-
-local function ontimerdone(inst)
-    local players = inst.components.walkableplatform:GetEntitiesOnPlatform({"player"},nil)
-    if #players == 0 then
-        inst:Remove()
-        print("计时器：删除船")
-    end
-end
-
-local function BoatAutoRemove(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return inst
-    end
-    inst:AddComponent("timer")
-    inst:ListenForEvent("obj_got_on_platform", stoptimer )
-    inst:ListenForEvent("obj_got_off_platform", starttimer)
-    inst.components.timer:StartTimer("boatRemoval", boat_delete_time)
-    inst:ListenForEvent("timerdone", ontimerdone)
-end
-
 if GetModConfigData("boat_clean") then
+
+    local boat_delete_time = GetModConfigData("boat_clean") * 480
+
+    local function starttimer(inst)
+        local players = inst.components.walkableplatform:GetEntitiesOnPlatform({"player"},nil)
+        if #players == 0 then
+            inst.components.timer:StartTimer("boatRemoval", boat_delete_time)
+            --print("计时器：开始")
+        end
+    end
+
+    local function stoptimer(inst, obj)
+        if obj and obj:HasTag("player") then
+            inst.components.timer:StopTimer("boatRemoval")
+            --print("计时器：结束")
+        end
+    end
+
+    local function ontimerdone(inst)
+        local players = inst.components.walkableplatform:GetEntitiesOnPlatform({"player"},nil)
+        if #players == 0 then
+            inst:Remove()
+            print("计时器：删除船")
+        end
+    end
+
+    local function BoatAutoRemove(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return inst
+        end
+        inst:AddComponent("timer")
+        inst:ListenForEvent("obj_got_on_platform", stoptimer )
+        inst:ListenForEvent("obj_got_off_platform", starttimer)
+        inst.components.timer:StartTimer("boatRemoval", boat_delete_time)
+        inst:ListenForEvent("timerdone", ontimerdone)
+    end
+
     AddPrefabPostInit("boat", BoatAutoRemove)
+    
 end
