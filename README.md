@@ -51,7 +51,21 @@ BTW, server reboot will remove all tags.
 - Meat Bulb
 - Bee Queen Crown
 
+You can open the mod folder and find the file named `whitelist.txt`. Add the prefab name of the thing you want to add into the whitelist. One item per line, do not add any `space`, for example,
+
+```
+poop
+log
+cutgrass
+twigs
+axe
+```
+
 ## Changelog
+
+**Version 1.7.0**
+
+- Now players can modify their own whitelist.
 
 **Version 1.6.0**
 

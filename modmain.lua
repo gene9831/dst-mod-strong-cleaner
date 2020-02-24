@@ -1,6 +1,7 @@
 local TheNet = GLOBAL.TheNet
 local lang = TheNet:GetDefaultServerLanguage()
 local Vector3 = GLOBAL.Vector3
+local io = GLOBAL.io
 
 local checkingdays = GetModConfigData("checking_days")
 local white_area = GetModConfigData("white_area")
@@ -56,6 +57,15 @@ local halfwhitelist = {
     "nightsword",               --影刀
     "armor_sanity",             --影甲
 }
+
+local readtxt,err = io.open(MODROOT.."/whitelist.txt", "r")
+if not err then
+    for line in readtxt:lines() do
+        line = string.sub(line, 1, -2)
+        table.insert(whitelist,line)
+        print('Whitelist Add:', line)
+    end
+end
 
 local function isWhitelist(name)
     for k,v in pairs(whitelist) do
