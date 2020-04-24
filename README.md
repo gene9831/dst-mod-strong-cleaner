@@ -50,6 +50,8 @@ BTW, server reboot will remove all tags.
 - Glommer's Goop
 - Meat Bulb
 - Bee Queen Crown
+- Shells
+- Tackle Containers
 
 You can open the mod folder and find the file named `whitelist.txt`. Add the prefab name of the thing you want to add into the whitelist. One item per line, do not add any `space`, for example,
 
@@ -63,27 +65,31 @@ axe
 
 ## Changelog
 
-**Version 1.7.0**
+### Version 1.7.1
+
+- Add Shells and Tackle Containers into the whitelist.
+
+### Version 1.7.0
 
 - Now players can modify their own whitelist.
 
-**Version 1.6.0**
+### Version 1.6.0
 
 - Add automatical boats destroying when not landed for a spiecific days in game.
 
-**Version 1.5.0**
+### Version 1.5.0
 
 - Items floating on the sea will be removed whether in the whitelist or not.
 
-**Version 1.4.0**
+### Version 1.4.0
 
 - Tentaclespike, Armor Sanity and Sword Sanity will be removed if the fitness use percent is < 100%.
 
-**Version 1.3.0**
+### Version 1.3.0
 
 - Things near Endtables will not be removed.
 
-**Version 1.2.1**
+### Version 1.2.1
 
 - Add Configuration for cleaning checking period.
 

@@ -40,6 +40,9 @@ local whitelist = {
     "tentaclespike",            --狼牙棒
     "nightsword",               --影刀
     "armor_sanity",             --影甲
+    "tacklecontainer",          --钓具箱
+    "supertacklecontainer",     --超级钓具箱
+    "singingshell_octave",      --贝壳钟(关键词 有3 4 5)
 }
 
 local whitetag = {
