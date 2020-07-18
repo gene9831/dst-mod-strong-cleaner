@@ -153,7 +153,7 @@ local function DoRemove()
             print("wiped", v, k)
         end
     	print("Wiping Done!")
-        if not GLOBAL.TheShard:IsSlave() then
+        if not GLOBAL.TheShard:IsSecondary() then
             if lang == "zh" then
                 TheNet:Announce(lightbulb.."服务器清理完毕"..lightbulb)
             else
