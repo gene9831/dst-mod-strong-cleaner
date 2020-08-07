@@ -5,6 +5,7 @@ local io = GLOBAL.io
 
 local checkingdays = GetModConfigData("checking_days")
 local white_area = GetModConfigData("white_area")
+local clean_mode = GetModConfigData("clean_mode")
 
 local lightbulb = "󰀏"
 
@@ -45,6 +46,14 @@ local whitelist = {
     "singingshell_octave",      --贝壳钟(关键词 有3 4 5)
 }
 
+local blacklist = {
+    "twigs",                    --树枝
+    "cutgrass",                 --割下的草
+    "spoiled_food",             --腐烂食物
+    "houndstooth",              --狗牙
+    "stinger",                  --蜂刺
+}
+
 local whitetag = {
     "smallcreature",           --鸟、兔子、鼹鼠
     "irreplaceable",           --可疑的大理石、远古钥匙、眼骨、星空、天体灵球、格罗姆花
@@ -61,17 +70,37 @@ local halfwhitelist = {
     "armor_sanity",             --影甲
 }
 
-local readtxt,err = io.open(MODROOT.."/whitelist.txt", "r")
-if not err then
-    for line in readtxt:lines() do
-        line = string.sub(line, 1, -2)
-        table.insert(whitelist,line)
-        print('Whitelist Add:', line)
+if clean_mode == 0 then
+    local readtxt,err = io.open(MODROOT.."/whitelist.txt", "r")
+    if not err then
+        for line in readtxt:lines() do
+            line = string.sub(line, 1, -2)
+            table.insert(whitelist,line)
+            print('Whitelist Add:', line)
+        end
+    end
+else
+    local readtxt,err = io.open(MODROOT.."/blacklist.txt", "r")
+    if not err then
+        for line in readtxt:lines() do
+            line = string.sub(line, 1, -2)
+            table.insert(blacklist,line)
+            print('Blacklist Add:', line)
+        end
     end
 end
 
 local function isWhitelist(name)
     for k,v in pairs(whitelist) do
+        if string.find(name, v) then
+            return true
+        end
+    end
+    return false
+end
+
+local function isBlacklist(name)
+    for k,v in pairs(blacklist) do
         if string.find(name, v) then
             return true
         end
@@ -128,7 +157,9 @@ local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
         if v.components.inventoryitem and v.components.inventoryitem.owner == nil then
-            if (not isWhitelist(v.prefab) and not isWhiteTag(v)) or isHalfWhitelist(v) or isFloat(v) then
+            if (clean_mode == 0 and not isWhitelist(v.prefab) and not isWhiteTag(v))
+                or (clean_mode == 1 and isBlacklist(v.prefab))
+                or isHalfWhitelist(v) or isFloat(v) then
                 if WhiteArea(v) then
                     if v:HasTag("RemoveCountOne") then
                         v:Remove()
