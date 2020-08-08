@@ -63,7 +63,15 @@ twigs
 axe
 ```
 
+The Blacklist is available now thanks to [gene9831](https://github.com/gene9831). You can edit the `blacklist.txt` in the mod folder, two. The format of the file content is the same as whitelist.
+
+**Backup your `whitelist.txt` and `blacklist.txt` because these two file will be emptied after mod update.**
+
 ## Changelog
+
+### Version 1.7.3
+
+- Add Blacklist.
 
 ### Version 1.7.1
 
