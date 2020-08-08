@@ -47,6 +47,16 @@ configuration_options =
 		default = 20,
 	},
     {
+        name = "clean_mode",
+        label = "Clean Mode",
+        hover = "Whitelist mode or Blacklist mode白名单模式或者黑名单模式",
+        options =   {
+                        {description = "Whitelist", data = 0, hover = ""},
+                        {description = "Blacklist", data = 1, hover = ""},
+                    },
+        default = 0,
+    },
+    {
         name = "white_area",
         label = "White Area",
         hover = "Things near the tables will not be removed茶几附近的物品不清理",
