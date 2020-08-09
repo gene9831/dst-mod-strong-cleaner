@@ -6,6 +6,7 @@ local io = GLOBAL.io
 local checkingdays = GetModConfigData("checking_days")
 local white_area = GetModConfigData("white_area")
 local clean_mode = GetModConfigData("clean_mode")
+local stump_clean = GetModConfigData("stump_clean")
 
 local lightbulb = "󰀏"
 
@@ -49,9 +50,25 @@ local whitelist = {
 local blacklist = {
     "twigs",                    --树枝
     "cutgrass",                 --割下的草
+    "log",                      --原木
     "spoiled_food",             --腐烂食物
     "houndstooth",              --狗牙
     "stinger",                  --蜂刺
+    "halloweencandy",           --万圣节糖果
+    "guano",                    --鸟屎
+    "poop",                     --便便
+    "feather_canary",           --羽毛
+    "feather_crow",
+    "feather_robin",
+    "spidergland",              --蜘蛛腺体
+    "silk",                     --蜘蛛网
+    "pinecone",                 --榛果
+    "acorn",                    --坚果
+    "twiggy_nut",               --多枝树种子
+}
+
+local blacklist_exclude = {
+    "driftwood_log"
 }
 
 local whitetag = {
@@ -108,6 +125,15 @@ local function isBlacklist(name)
     return false
 end
 
+local function isBlacklistExclude(name)
+    for k,v in pairs(blacklist_exclude) do
+        if string.find(name, v) then
+            return true
+        end
+    end
+    return false
+end
+
 local function isWhiteTag(fabs)
     for k,v in pairs(whitetag) do
         if fabs:HasTag(v) then
@@ -156,23 +182,27 @@ end
 local function DoRemove()
     local list = {}
     for k,v in pairs(GLOBAL.Ents) do
-        if v.components.inventoryitem and v.components.inventoryitem.owner == nil then
-            if (clean_mode == 0 and not isWhitelist(v.prefab) and not isWhiteTag(v))
-                or (clean_mode == 1 and isBlacklist(v.prefab))
-                or isHalfWhitelist(v) or isFloat(v) then
-                if WhiteArea(v) then
-                    if v:HasTag("RemoveCountOne") then
-                        v:Remove()
-                        local numm = list[v.name.."  "..v.prefab]
-                        if numm == nil then
-                            list[v.name.."  "..v.prefab] = 1
-                        else
-                            numm = numm + 1
-                            list[v.name.."  "..v.prefab] = numm
-                        end
+        -- For Inventory Item
+        local conditon1 = v.components.inventoryitem and v.components.inventoryitem.owner == nil and (
+                            (clean_mode == 0 and not isWhitelist(v.prefab) and not isWhiteTag(v)) or
+                            (clean_mode == 1 and isBlacklist(v.prefab) and not isBlacklistExclude(v.prefab)) or
+                            isHalfWhitelist(v) or isFloat(v))
+        -- For Stump
+        local conditon2 = stump_clean and v.components.plantregrowth and v:HasTag("stump") and
+                            not string.find(v.prefab, "mushtree")
+        if conditon1 or conditon2 then
+            if WhiteArea(v) then
+                if v:HasTag("RemoveCountOne") then
+                    v:Remove()
+                    local numm = list[v.name.."  "..v.prefab]
+                    if numm == nil then
+                        list[v.name.."  "..v.prefab] = 1
                     else
-                        v:AddTag("RemoveCountOne")
+                        numm = numm + 1
+                        list[v.name.."  "..v.prefab] = numm
                     end
+                else
+                    v:AddTag("RemoveCountOne")
                 end
             end
         end
@@ -222,6 +252,9 @@ end
 
 AddPrefabPostInit("forest", WorldPeriodicRemove)
 AddPrefabPostInit("cave", CavePeriodicRemove)
+
+--添加手动清理的功能
+GLOBAL.DoRemove = DoRemove
 
 --For Boat
 
